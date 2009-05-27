@@ -1,0 +1,8 @@
+<p>
+    Name: <%=h comment.name %>
+</p>
+<%= simple_format comment.body %>
+
+<% if !current_user.nil? %>
+    <p><%= link_to 'Delete Comment', comment, :confirm => 'Are you sure?', :method => :delete %></p>
+<% end %>
