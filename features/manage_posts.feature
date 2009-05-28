@@ -17,6 +17,15 @@ Feature: Manage posts
     Then I should see "title 1"
     And I should see "body 1"
 
+  Scenario: Attempt to create an invalid post
+    Given I sign in as "email@domain.com/password"
+	And I am on the new post page
+    When I fill in "Title" with ""
+    And I fill in "Body" with ""
+    And I press "Create"
+    Then I should see "Title can't be blank"
+    And I should see "Body can't be blank"
+
    Scenario: Create a new draft post
     Given I sign in as "email@domain.com/password"
 	And I am on the new post page
