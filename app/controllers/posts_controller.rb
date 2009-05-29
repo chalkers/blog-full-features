@@ -1,13 +1,12 @@
 class PostsController < ApplicationController
-  before_filter :authenticate, :only => [:new, :create, :edit, :update, :destroy]
   before_filter :authenticate, :except => [:show, :index]
   # GET /posts
   # GET /posts.xml
   def index
-    if self.signed_in?
-      @posts = Post.paginate :page => params[:page]
+    if signed_in?
+      @posts = Post.paginate :page => params[:page], :order => 'created_at DESC'
     else
-      @posts = Post.published.paginate :all, :page => params[:page]
+      @posts = Post.published.paginate :page => params[:page], :order => 'created_at DESC'
     end
     respond_to do |format|
       format.html # index.html.erb
